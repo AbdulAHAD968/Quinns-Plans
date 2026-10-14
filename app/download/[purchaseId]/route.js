@@ -1,6 +1,7 @@
 import { connectDB } from "@/lib/db";
 import GuidePurchase from "@/models/GuidePurchase";
 import { isValidToken } from "@/lib/downloadToken";
+import { getPrivateDownloadUrl } from "@/lib/cloudinary";
 
 export async function GET(req, { params }) {
   const { purchaseId } = await params;
@@ -22,5 +23,6 @@ export async function GET(req, { params }) {
   purchase.lastDownloadedAt = new Date();
   await purchase.save();
 
-  return Response.redirect(purchase.generatedFileUrl, 302);
+  const signedUrl = getPrivateDownloadUrl(purchase.generatedFileUrl);
+  return Response.redirect(signedUrl, 302);
 }

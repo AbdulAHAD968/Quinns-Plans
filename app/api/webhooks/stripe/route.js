@@ -35,11 +35,7 @@ export async function POST(req) {
       // alive for it), so Stripe gets a fast ack regardless of how long
       // OpenAI/PDF rendering/Cloudinary take.
       const purchaseId = purchase._id;
-      after(() =>
-        generateGuideForPurchase(purchaseId).catch((err) => {
-          console.error(`Guide generation failed for purchase ${purchaseId}:`, err);
-        })
-      );
+      after(() => generateGuideForPurchase(purchaseId).catch(() => {})); // errors are logged and recorded inside generateGuideForPurchase
     }
   }
 

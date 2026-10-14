@@ -13,6 +13,10 @@ const GuidePurchaseSchema = new mongoose.Schema(
     currency: { type: String, default: "usd" },
     status: { type: String, enum: ["pending", "paid", "failed", "refunded"], default: "pending" },
     customerEmail: { type: String, default: "", trim: true, lowercase: true },
+    // Stores the Cloudinary public_id of the generated file, NOT a fetchable URL.
+    // The actual download URL is derived at request time via a short-lived signed
+    // link (see lib/cloudinary.js getPrivateDownloadUrl) so a leaked DB value or
+    // log line alone can't be used to pull the file later.
     generatedFileUrl: { type: String, default: "" },
     generatedFileFormat: { type: String, enum: ["pdf", "docx"], default: "pdf" },
     downloadCount: { type: Number, default: 0 },
