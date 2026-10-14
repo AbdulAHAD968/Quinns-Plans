@@ -1,8 +1,11 @@
 import { notFound } from "next/navigation";
 import { connectDB } from "@/lib/db";
 import Guide from "@/models/Guide";
+import GuideCategory from "@/models/GuideCategory"; // required by Guide.populate("categoryId") below
 import PlanTemplate from "@/models/PlanTemplate";
 import { CheckCircle2 } from "lucide-react";
+
+void GuideCategory;
 
 export default async function GuidePage({ params }) {
   const { slug } = await params;
@@ -11,13 +14,17 @@ export default async function GuidePage({ params }) {
   const guide = await Guide.findOne({ slug, status: "published", isActive: true }).populate("categoryId", "name slug").lean();
   if (!guide) notFound();
 
-  const template = await PlanTemplate.findById(guide.templateId).lean();
+  const template = guide.templateId ? await PlanTemplate.findById(guide.templateId).lean() : null;
+
+  const categorySlug = guide.categoryId?.slug;
+  const categoryName = guide.categoryId?.name || "All Guides";
+  const categoryHref = categorySlug ? `/categories/${categorySlug}` : "/";
 
   return (
     <section style={{ padding: "140px 24px 96px", backgroundColor: "var(--color-canvas)", minHeight: "60vh" }}>
       <div style={{ maxWidth: 880, margin: "0 auto" }}>
-        <a href={`/categories/${guide.categoryId?.slug}`} style={{ fontSize: 13, color: "var(--color-primary)", textDecoration: "none", fontWeight: 500 }}>
-          &larr; {guide.categoryId?.name}
+        <a href={categoryHref} style={{ fontSize: 13, color: "var(--color-primary)", textDecoration: "none", fontWeight: 500 }}>
+          &larr; {categoryName}
         </a>
 
         <h1 style={{ fontSize: "clamp(28px, 4vw, 44px)", letterSpacing: "-0.8px", color: "var(--color-ink)", marginTop: 16, marginBottom: 16 }}>

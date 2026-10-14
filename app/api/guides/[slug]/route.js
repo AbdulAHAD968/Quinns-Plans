@@ -1,6 +1,9 @@
 import { connectDB } from "@/lib/db";
 import Guide from "@/models/Guide";
+import GuideCategory from "@/models/GuideCategory"; // required by Guide.populate("categoryId") below
 import Questionnaire from "@/models/Questionnaire";
+
+void GuideCategory;
 
 export async function GET(req, { params }) {
   const { slug } = await params;

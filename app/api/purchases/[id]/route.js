@@ -1,6 +1,9 @@
 import { connectDB } from "@/lib/db";
 import GuidePurchase from "@/models/GuidePurchase";
+import Guide from "@/models/Guide"; // required by GuidePurchase.populate("guideId") below
 import { isValidToken } from "@/lib/downloadToken";
+
+void Guide;
 
 export async function GET(req, { params }) {
   const { id } = await params;
