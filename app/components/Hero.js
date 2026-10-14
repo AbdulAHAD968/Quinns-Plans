@@ -26,7 +26,7 @@ export default function Hero() {
         }}
       >
         <div className="hero-side hero-side--right hero-side--candle" aria-hidden="true">
-          <CandleAnimation scale={1.35} />
+          <CandleAnimation scale={0.96} top="58%" left="46%" />
         </div>
 
         <div className="hero-grid">
@@ -118,7 +118,7 @@ export default function Hero() {
           </div>
 
           <div className="fade-up hero-candle-mobile" aria-hidden="true" style={{ animationDelay: "320ms" }}>
-            <CandleAnimation scale={1.05} />
+            <CandleAnimation scale={0.85} top="50%" left="50%" />
           </div>
         </div>
       </div>
