@@ -1,4 +1,3 @@
-import { randomBytes } from "crypto";
 import { connectDB } from "@/lib/db";
 import Guide from "@/models/Guide";
 import Questionnaire from "@/models/Questionnaire";
@@ -6,6 +5,7 @@ import PlanTemplate from "@/models/PlanTemplate";
 import GuidePurchase from "@/models/GuidePurchase";
 import { stripe } from "@/lib/stripe";
 import { getOrCreateVisitorSession, logEvent } from "@/lib/visitor";
+import { generateDownloadToken } from "@/lib/downloadToken";
 
 function isAnswerPresent(value) {
   if (value === undefined || value === null || value === "") return false;
@@ -56,21 +56,21 @@ export async function POST(req) {
   const session = await getOrCreateVisitorSession(req);
   await logEvent(session, "checkout_start", { guideSlug });
 
-  const downloadToken = randomBytes(32).toString("base64url");
+  const { token: downloadToken, tokenHash: downloadTokenHash } = generateDownloadToken();
 
   const purchase = await GuidePurchase.create({
     sessionId: session._id,
     guideId: guide._id,
     assessmentAnswers: answers,
     templateVersionSnapshot: template.version,
-    downloadToken,
+    downloadTokenHash,
     amountCents: guide.priceCents,
     currency: guide.currency,
     status: "pending",
     customerEmail: customerEmail || "",
   });
 
-  const origin = req.headers.get("origin") || `${req.headers.get("x-forwarded-proto") || "https"}://${req.headers.get("host")}`;
+  const origin = process.env.CLIENT_URL || "http://localhost:3000";
 
   const checkoutSession = await stripe.checkout.sessions.create({
     mode: "payment",

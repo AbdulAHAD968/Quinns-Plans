@@ -10,7 +10,7 @@ export async function GET(req, { params }) {
   await connectDB();
 
   const purchase = await GuidePurchase.findById(id).populate("guideId", "title formats");
-  if (!purchase || !isValidToken(purchase.downloadToken, token)) {
+  if (!purchase || !isValidToken(purchase.downloadTokenHash, token)) {
     return Response.json({ error: "Purchase not found." }, { status: 404 });
   }
 
