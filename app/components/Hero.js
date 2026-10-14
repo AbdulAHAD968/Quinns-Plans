@@ -1,5 +1,4 @@
 import { CandleCanvas } from "./CandleCanvas";
-import { TreeCanvas } from "./TreeCanvas";
 
 export default function Hero() {
   return (
@@ -26,9 +25,6 @@ export default function Hero() {
           boxShadow: "0 28px 80px rgba(28, 26, 23, 0.14)",
         }}
       >
-        <div className="hero-side hero-side--left hero-side--tree" aria-hidden="true">
-          <TreeCanvas />
-        </div>
         <div className="hero-side hero-side--right hero-side--candle" aria-hidden="true">
           <CandleCanvas />
         </div>
@@ -157,20 +153,8 @@ export default function Hero() {
           z-index: 0;
           opacity: 0.85;
         }
-        .hero-side--left {
-          left: 0;
-        }
         .hero-side--right {
           right: -6%;
-        }
-        .hero-side--tree {
-          display: flex;
-          align-items: flex-end;
-          justify-content: center;
-        }
-        .hero-side--tree canvas {
-          max-height: 420px !important;
-          width: auto !important;
         }
         .hero-side--candle {
           display: flex;
