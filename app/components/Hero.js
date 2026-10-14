@@ -1,3 +1,6 @@
+import { CandleCanvas } from "./CandleCanvas";
+import { TreeCanvas } from "./TreeCanvas";
+
 export default function Hero() {
   return (
     <section
@@ -19,11 +22,17 @@ export default function Hero() {
           borderRadius: 24,
           overflow: "hidden",
           position: "relative",
-          background:
-            "radial-gradient(circle at 12% 30%, rgba(181, 105, 63, 0.55) 0%, transparent 60%), radial-gradient(circle at 88% 15%, rgba(122, 138, 111, 0.35) 0%, transparent 55%), radial-gradient(circle at 50% 100%, rgba(217, 167, 99, 0.4) 0%, transparent 65%), #212121",
+          background: "#212121",
           boxShadow: "0 28px 80px rgba(28, 26, 23, 0.14)",
         }}
       >
+        <div className="hero-side hero-side--left" aria-hidden="true">
+          <CandleCanvas />
+        </div>
+        <div className="hero-side hero-side--right" aria-hidden="true">
+          <TreeCanvas />
+        </div>
+
         <div
           className="hero-grid"
           style={{
@@ -32,7 +41,7 @@ export default function Hero() {
             maxWidth: 820,
             textAlign: "center",
             position: "relative",
-            zIndex: 1,
+            zIndex: 2,
           }}
         >
           <div
@@ -45,7 +54,7 @@ export default function Hero() {
               padding: "6px 16px",
               borderRadius: 999,
               border: "1px solid rgba(247,244,239,0.25)",
-              backgroundColor: "rgba(247,244,239,0.08)",
+              backgroundColor: "rgba(33,33,33,0.55)",
               fontSize: 12.5,
               fontWeight: 500,
               letterSpacing: "0.5px",
@@ -65,6 +74,7 @@ export default function Hero() {
               color: "var(--color-on-dark)",
               marginBottom: 20,
               animationDelay: "80ms",
+              textShadow: "0 2px 24px rgba(0,0,0,0.4)",
             }}
           >
             A plan built around <span style={{ color: "#f0c896" }}>your life</span>, not a template
@@ -75,16 +85,16 @@ export default function Hero() {
             style={{
               fontSize: 17,
               lineHeight: 1.65,
-              color: "rgba(247,244,239,0.82)",
+              color: "rgba(247,244,239,0.85)",
               marginBottom: 32,
               maxWidth: 560,
               marginLeft: "auto",
               marginRight: "auto",
-              animationDelay: "160ms",
+              textShadow: "0 1px 12px rgba(0,0,0,0.5)",
             }}
           >
             Answer a few questions about your home, your goals, or your routine. Get a personalized step-by-step
-            guide - delivered as a PDF you can start using today.
+            guide &mdash; delivered as a PDF you can start using today.
           </p>
 
           <div
@@ -108,7 +118,7 @@ export default function Hero() {
             <a
               href="#how-it-works"
               style={{
-                backgroundColor: "rgba(247,244,239,0.1)",
+                backgroundColor: "rgba(33,33,33,0.55)",
                 color: "var(--color-on-dark)",
                 fontSize: 14.5,
                 fontWeight: 500,
@@ -125,17 +135,45 @@ export default function Hero() {
       </div>
 
       <style>{`
-        .hero-panel::before {
+        .hero-panel::after {
           content: "";
           position: absolute;
           inset: 0;
-          background-image:
-            linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px);
-          background-size: 40px 40px, 40px 40px;
-          mix-blend-mode: overlay;
-          opacity: 0.5;
+          background: radial-gradient(ellipse 60% 70% at 50% 45%, rgba(33,33,33,0.82) 0%, rgba(33,33,33,0.45) 55%, transparent 80%);
+          z-index: 1;
           pointer-events: none;
+        }
+        .hero-side {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 34%;
+          z-index: 0;
+          opacity: 0.85;
+        }
+        .hero-side--left {
+          left: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-side--left > div {
+          position: relative !important;
+          width: 70% !important;
+          height: 70% !important;
+        }
+        .hero-side--right {
+          right: -6%;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+        }
+        .hero-side--right canvas {
+          max-height: 420px !important;
+          width: auto !important;
+        }
+        @media (max-width: 900px) {
+          .hero-side { display: none !important; }
         }
         @media (max-width: 768px) {
           .hero-section { padding: 6px 12px 12px !important; }

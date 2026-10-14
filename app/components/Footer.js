@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer
@@ -20,18 +22,8 @@ export default function Footer() {
         >
           <div style={{ maxWidth: 320 }}>
             <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, textDecoration: "none" }}>
-              <div
-                style={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: 8,
-                  backgroundColor: "var(--color-primary)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <span style={{ color: "#fff", fontWeight: 600, fontSize: 14, fontFamily: "var(--font-display)" }}>Q</span>
+              <div style={{ width: 30, height: 30, borderRadius: 8, overflow: "hidden", position: "relative" }}>
+                <Image src="/logo.png" alt="Body By Quinn" fill style={{ objectFit: "cover" }} />
               </div>
               <span style={{ fontFamily: "var(--font-display)", fontSize: 16, fontWeight: 500, color: "var(--color-on-dark)" }}>
                 Body By Quinn

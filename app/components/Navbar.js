@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const LINKS = [
@@ -65,14 +66,12 @@ export default function Navbar() {
                 width: 28,
                 height: 28,
                 borderRadius: 7,
-                backgroundColor: "var(--color-primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                overflow: "hidden",
                 flexShrink: 0,
+                position: "relative",
               }}
             >
-              <span style={{ color: "#fff", fontWeight: 600, fontSize: 13, fontFamily: "var(--font-display)" }}>Q</span>
+              <Image src="/logo.png" alt="Body By Quinn" fill style={{ objectFit: "cover" }} />
             </div>
             <span
               style={{
