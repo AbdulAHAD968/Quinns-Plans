@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { connectDB } from "@/lib/db";
 import Guide from "@/models/Guide";
 import Questionnaire from "@/models/Questionnaire";
@@ -55,11 +56,14 @@ export async function POST(req) {
   const session = await getOrCreateVisitorSession(req);
   await logEvent(session, "checkout_start", { guideSlug });
 
+  const downloadToken = randomBytes(32).toString("base64url");
+
   const purchase = await GuidePurchase.create({
     sessionId: session._id,
     guideId: guide._id,
     assessmentAnswers: answers,
     templateVersionSnapshot: template.version,
+    downloadToken,
     amountCents: guide.priceCents,
     currency: guide.currency,
     status: "pending",
@@ -81,7 +85,7 @@ export async function POST(req) {
       },
     ],
     customer_email: customerEmail || undefined,
-    success_url: `${origin}/success?purchase_id=${purchase._id}`,
+    success_url: `${origin}/success?purchase_id=${purchase._id}&token=${downloadToken}`,
     cancel_url: `${origin}/guides/${guide.slug}`,
     metadata: { purchaseId: String(purchase._id) },
   });

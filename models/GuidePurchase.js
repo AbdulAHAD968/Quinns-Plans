@@ -8,6 +8,7 @@ const GuidePurchaseSchema = new mongoose.Schema(
     templateVersionSnapshot: { type: Number, required: true },
     stripeSessionId: { type: String, default: "" },
     stripePaymentIntentId: { type: String, default: "" },
+    downloadToken: { type: String, default: "", index: true },
     amountCents: { type: Number, required: true },
     currency: { type: String, default: "usd" },
     status: { type: String, enum: ["pending", "paid", "failed", "refunded"], default: "pending" },

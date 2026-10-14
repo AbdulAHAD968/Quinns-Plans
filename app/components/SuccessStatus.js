@@ -3,17 +3,17 @@
 import { useState, useEffect, useRef } from "react";
 import { CheckCircle2, Loader2, AlertTriangle, Download } from "lucide-react";
 
-export default function SuccessStatus({ purchaseId }) {
+export default function SuccessStatus({ purchaseId, token }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (!purchaseId) { setError("Missing purchase reference."); return; }
+    if (!purchaseId || !token) { setError("Missing purchase reference."); return; }
 
     async function poll() {
       try {
-        const res = await fetch(`/api/purchases/${purchaseId}`);
+        const res = await fetch(`/api/purchases/${purchaseId}?token=${encodeURIComponent(token)}`);
         if (!res.ok) { setError("We couldn't find that purchase."); return; }
         const json = await res.json();
         setData(json);
@@ -28,7 +28,7 @@ export default function SuccessStatus({ purchaseId }) {
     poll();
     intervalRef.current = setInterval(poll, 3000);
     return () => clearInterval(intervalRef.current);
-  }, [purchaseId]);
+  }, [purchaseId, token]);
 
   if (error) {
     return (
@@ -71,7 +71,7 @@ export default function SuccessStatus({ purchaseId }) {
         <h1 style={{ fontSize: 26, color: "var(--color-ink)", marginBottom: 10 }}>Your guide is ready</h1>
         <p style={{ color: "var(--color-muted)", fontSize: 15, marginBottom: 28 }}>{data.guideTitle}</p>
         <a
-          href={`/download/${purchaseId}`}
+          href={`/download/${purchaseId}?token=${encodeURIComponent(token)}`}
           className="btn-primary"
           style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#fff", padding: "14px 32px", borderRadius: 10, textDecoration: "none", fontSize: 15, fontWeight: 500 }}
         >
