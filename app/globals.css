@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand */
+  --color-primary: #b5693f;
+  --color-primary-active: #8c4f2e;
+  --color-accent-amber: #d9a763;
+  --color-accent-sage: #7a8a6f;
+
+  /* Surfaces */
+  --color-canvas: #f7f4ef;
+  --color-surface-card: #efe5db;
+  --color-surface-soft: #f2ece2;
+  --color-surface-dark: #212121;
+  --color-surface-dark-elevated: #2b2b2b;
+
+  /* Borders */
+  --color-hairline: #e3dbcd;
+  --color-hairline-soft: #ece5d9;
+
+  /* Text */
+  --color-ink: #1c1a17;
+  --color-body: #3f3b35;
+  --color-muted: #726c62;
+  --color-muted-soft: #96908578;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #f7f4ef;
+  --color-on-dark-soft: #a8a19592;
+
+  /* Semantic */
+  --color-success: #5f8f5a;
+  --color-warning: #c99a2e;
+  --color-error: #b84a3d;
+
+  --font-display: var(--font-playfair, "Times New Roman", serif);
+  --font-sans: var(--font-inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-pill: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-canvas);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-hairline);
+  border-radius: 9999px;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+/* FAQ accordion button hover */
+.faq-button:hover { color: var(--color-primary) !important; }
+.faq-button:hover .faq-icon { color: var(--color-primary) !important; transform: scale(1.1); }
+
+/* Category / guide card hover */
+.hover-card { transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; }
+.hover-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+  box-shadow: 0 20px 48px rgba(28, 26, 23, 0.1);
+}
+
+/* Primary button */
+.btn-primary {
+  background-color: var(--color-primary);
+  transition: background-color 0.15s;
+}
+.btn-primary:hover { background-color: var(--color-primary-active) !important; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Option pill (questionnaire) */
+.option-pill {
+  transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+}
+.option-pill:hover {
+  border-color: var(--color-primary);
+}
+.option-pill--selected {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-on-dark);
 }
