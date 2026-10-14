@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Hero from "./components/Hero";
 import CategoryGrid from "./components/CategoryGrid";
+import GrowthSection from "./components/GrowthSection";
 import Process from "./components/Process";
 import FAQ from "./components/FAQ";
 
@@ -21,6 +22,7 @@ export default function Home() {
       <Suspense fallback={<CategoryGridSkeleton />}>
         <CategoryGrid />
       </Suspense>
+      <GrowthSection />
       <Process />
       <FAQ />
     </>

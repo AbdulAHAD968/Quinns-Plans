@@ -26,11 +26,11 @@ export default function Hero() {
           boxShadow: "0 28px 80px rgba(28, 26, 23, 0.14)",
         }}
       >
-        <div className="hero-side hero-side--left" aria-hidden="true">
-          <CandleCanvas />
-        </div>
-        <div className="hero-side hero-side--right" aria-hidden="true">
+        <div className="hero-side hero-side--left hero-side--tree" aria-hidden="true">
           <TreeCanvas />
+        </div>
+        <div className="hero-side hero-side--right hero-side--candle" aria-hidden="true">
+          <CandleCanvas />
         </div>
 
         <div
@@ -94,7 +94,7 @@ export default function Hero() {
             }}
           >
             Answer a few questions about your home, your goals, or your routine. Get a personalized step-by-step
-            guide &mdash; delivered as a PDF you can start using today.
+            guide - delivered as a PDF you can start using today.
           </p>
 
           <div
@@ -135,6 +135,11 @@ export default function Hero() {
       </div>
 
       <style>{`
+        .hero-panel {
+          min-height: calc(100vh - 32px);
+          display: flex;
+          align-items: center;
+        }
         .hero-panel::after {
           content: "";
           position: absolute;
@@ -143,6 +148,7 @@ export default function Hero() {
           z-index: 1;
           pointer-events: none;
         }
+        .hero-grid { width: 100%; }
         .hero-side {
           position: absolute;
           top: 0;
@@ -153,31 +159,35 @@ export default function Hero() {
         }
         .hero-side--left {
           left: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .hero-side--left > div {
-          position: relative !important;
-          width: 70% !important;
-          height: 70% !important;
         }
         .hero-side--right {
           right: -6%;
+        }
+        .hero-side--tree {
           display: flex;
           align-items: flex-end;
           justify-content: center;
         }
-        .hero-side--right canvas {
+        .hero-side--tree canvas {
           max-height: 420px !important;
           width: auto !important;
+        }
+        .hero-side--candle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .hero-side--candle > div {
+          position: relative !important;
+          width: 70% !important;
+          height: 70% !important;
         }
         @media (max-width: 900px) {
           .hero-side { display: none !important; }
         }
         @media (max-width: 768px) {
           .hero-section { padding: 6px 12px 12px !important; }
-          .hero-panel { border-radius: 20px !important; }
+          .hero-panel { border-radius: 20px !important; min-height: calc(100vh - 12px); }
           .hero-grid { padding: 104px 24px 40px !important; }
         }
       `}</style>
