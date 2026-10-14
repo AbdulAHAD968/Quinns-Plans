@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer() {
   return (
     <footer
@@ -58,7 +60,7 @@ export default function Footer() {
 
         <div style={{ paddingTop: 24, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
           <p style={{ fontSize: 13, color: "var(--color-on-dark-soft)" }}>
-            &copy; {new Date().getFullYear()} Body By Quinn. All rights reserved.
+            &copy; {CURRENT_YEAR} Body By Quinn. All rights reserved.
           </p>
         </div>
       </div>
