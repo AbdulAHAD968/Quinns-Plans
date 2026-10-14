@@ -1,4 +1,4 @@
-import { CandleCanvas } from "./CandleCanvas";
+import { CandleAnimation } from "./CandleAnimation";
 
 export default function Hero() {
   return (
@@ -26,7 +26,7 @@ export default function Hero() {
         }}
       >
         <div className="hero-side hero-side--right hero-side--candle" aria-hidden="true">
-          <CandleCanvas />
+          <CandleAnimation scale={1.35} />
         </div>
 
         <div className="hero-grid">
@@ -116,6 +116,10 @@ export default function Hero() {
               See How It Works
             </a>
           </div>
+
+          <div className="fade-up hero-candle-mobile" aria-hidden="true" style={{ animationDelay: "320ms" }}>
+            <CandleAnimation scale={1.05} />
+          </div>
         </div>
       </div>
 
@@ -146,22 +150,21 @@ export default function Hero() {
           position: absolute;
           top: 0;
           bottom: 0;
-          width: 46%;
-          z-index: 0;
-          opacity: 0.95;
+          width: 44%;
+          z-index: 2;
+          pointer-events: none;
+          opacity: 1;
         }
         .hero-side--right {
-          right: 0;
+          right: 2%;
         }
         .hero-side--candle {
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .hero-side--candle > div {
-          position: relative !important;
-          width: 86% !important;
-          height: 86% !important;
+        .hero-candle-mobile {
+          display: none;
         }
         @media (max-width: 900px) {
           .hero-panel::after {
@@ -169,6 +172,14 @@ export default function Hero() {
           }
           .hero-side {
             display: none !important;
+          }
+          .hero-candle-mobile {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            margin-top: 36px;
+            width: 100%;
+            height: 220px;
           }
           .hero-grid {
             width: 100% !important;
