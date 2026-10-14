@@ -22,6 +22,8 @@ export async function GET(req, { params }) {
     generationStatus: purchase.generationStatus,
     generationError: purchase.generationError,
     guideTitle: purchase.guideId?.title || "",
+    customerEmail: purchase.customerEmail || "",
+    format: purchase.generatedFileFormat || "pdf",
     downloadReady: purchase.generationStatus === "ready" && !!purchase.generatedFileUrl,
   });
 }
