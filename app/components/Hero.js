@@ -29,19 +29,7 @@ export default function Hero() {
           <CandleCanvas />
         </div>
 
-        <div
-          className="hero-grid"
-          style={{
-            margin: "0 auto",
-            padding: "140px 7vw 64px",
-            width: "58%",
-            maxWidth: 760,
-            marginRight: "42%",
-            textAlign: "left",
-            position: "relative",
-            zIndex: 2,
-          }}
-        >
+        <div className="hero-grid">
           <div
             className="fade-up"
             style={{
@@ -65,9 +53,9 @@ export default function Hero() {
           <h1
             className="fade-up"
             style={{
-              fontSize: "clamp(36px, 5.5vw, 62px)",
+              fontSize: "clamp(32px, 5.5vw, 62px)",
               fontWeight: 400,
-              lineHeight: 1.08,
+              lineHeight: 1.1,
               letterSpacing: "-1.2px",
               color: "var(--color-on-dark)",
               marginBottom: 20,
@@ -82,7 +70,7 @@ export default function Hero() {
           <p
             className="fade-up"
             style={{
-              fontSize: 17,
+              fontSize: 16.5,
               lineHeight: 1.65,
               color: "rgba(247,244,239,0.85)",
               marginBottom: 32,
@@ -95,7 +83,7 @@ export default function Hero() {
           </p>
 
           <div
-            className="fade-up"
+            className="fade-up hero-buttons"
             style={{ display: "flex", gap: 12, justifyContent: "flex-start", flexWrap: "wrap", animationDelay: "240ms" }}
           >
             <a
@@ -145,7 +133,15 @@ export default function Hero() {
           z-index: 1;
           pointer-events: none;
         }
-        .hero-grid { width: 58%; }
+        .hero-grid {
+          position: relative;
+          z-index: 2;
+          width: 58%;
+          max-width: 760px;
+          margin: 0 auto 0 0;
+          padding: 140px 7vw 64px;
+          text-align: left;
+        }
         .hero-side {
           position: absolute;
           top: 0;
@@ -168,20 +164,46 @@ export default function Hero() {
           height: 86% !important;
         }
         @media (max-width: 900px) {
-          .hero-side { display: none !important; }
+          .hero-panel::after {
+            background: rgba(33,33,33,0.95) !important;
+          }
+          .hero-side {
+            display: none !important;
+          }
           .hero-grid {
-            width: 100%;
-            max-width: none !important;
-            margin-right: 0 !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+            padding: 110px 24px 60px !important;
             text-align: center !important;
           }
-          .hero-grid p { margin-left: auto; margin-right: auto; }
-          .hero-grid > div:last-child { justify-content: center !important; }
+          .hero-grid p {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .hero-buttons {
+            justify-content: center !important;
+          }
         }
-        @media (max-width: 768px) {
-          .hero-section { padding: 6px 12px 12px !important; }
-          .hero-panel { border-radius: 20px !important; min-height: calc(100vh - 12px); }
-          .hero-grid { padding: 104px 24px 40px !important; }
+        @media (max-width: 600px) {
+          .hero-section {
+            padding: 6px 10px 12px !important;
+          }
+          .hero-panel {
+            border-radius: 20px !important;
+            min-height: calc(100vh - 12px);
+          }
+          .hero-grid {
+            padding: 96px 18px 48px !important;
+          }
+          .hero-buttons {
+            flex-direction: column !important;
+            width: 100% !important;
+          }
+          .hero-buttons a {
+            width: 100% !important;
+            text-align: center !important;
+          }
         }
       `}</style>
     </section>

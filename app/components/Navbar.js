@@ -111,7 +111,7 @@ export default function Navbar() {
 
           <a
             href="/#categories"
-            className="btn-primary"
+            className="btn-primary nav-cta-btn"
             style={{
               marginLeft: 16,
               color: "#fff",
@@ -195,6 +195,9 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .nav-links { display: none !important; }
           .hamburger { display: flex !important; }
+        }
+        @media (max-width: 520px) {
+          .nav-cta-btn { display: none !important; }
         }
       `}</style>
     </>
