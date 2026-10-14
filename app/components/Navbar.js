@@ -42,11 +42,11 @@ export default function Navbar() {
             alignItems: "center",
             gap: 0,
             backgroundColor: scrolled ? "var(--color-surface-dark)" : "var(--color-canvas)",
-            border: "1px solid var(--color-hairline)",
+            border: scrolled ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid var(--color-hairline)",
             borderRadius: 14,
-            boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
+            boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.24)" : "0 2px 16px rgba(0,0,0,0.08)",
             padding: "8px 10px 8px 18px",
-            transition: "background-color 0.3s ease",
+            transition: "all 0.3s ease",
             whiteSpace: "nowrap",
           }}
         >
@@ -80,6 +80,7 @@ export default function Navbar() {
                 fontWeight: 500,
                 color: scrolled ? "var(--color-on-dark)" : "var(--color-ink)",
                 letterSpacing: "-0.2px",
+                transition: "color 0.2s ease",
               }}
             >
               Body By Quinn
@@ -99,9 +100,9 @@ export default function Navbar() {
                   textDecoration: "none",
                   borderRadius: 8,
                   whiteSpace: "nowrap",
-                  transition: "color 0.15s",
+                  transition: "all 0.15s ease",
                 }}
-                className="nav-link-item"
+                className={`nav-link-item ${scrolled ? "nav-link-item--scrolled" : ""}`}
               >
                 {l.label}
               </a>
@@ -131,7 +132,7 @@ export default function Navbar() {
             aria-label={open ? "Close menu" : "Open menu"}
             style={{
               background: "none",
-              border: "1px solid var(--color-hairline)",
+              border: scrolled ? "1px solid rgba(255,255,255,0.18)" : "1px solid var(--color-hairline)",
               borderRadius: 8,
               padding: 7,
               marginLeft: 10,
@@ -183,7 +184,14 @@ export default function Navbar() {
       )}
 
       <style>{`
-        .nav-link-item:hover { color: var(--color-ink) !important; }
+        .nav-link-item:hover {
+          color: var(--color-primary) !important;
+          background-color: rgba(181, 105, 63, 0.08);
+        }
+        .nav-link-item--scrolled:hover {
+          color: #ffffff !important;
+          background-color: rgba(255, 255, 255, 0.12) !important;
+        }
         @media (max-width: 768px) {
           .nav-links { display: none !important; }
           .hamburger { display: flex !important; }
