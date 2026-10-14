@@ -72,18 +72,20 @@ export async function POST(req) {
 
   const origin = process.env.CLIENT_URL || "http://localhost:3000";
 
-  const checkoutSession = await stripe.checkout.sessions.create({
-    mode: "payment",
-    line_items: [
-      {
+  const lineItem = guide.stripePriceId
+    ? { price: guide.stripePriceId, quantity: 1 }
+    : {
         price_data: {
           currency: guide.currency,
           unit_amount: guide.priceCents,
           product_data: { name: guide.title, description: guide.description || undefined },
         },
         quantity: 1,
-      },
-    ],
+      };
+
+  const checkoutSession = await stripe.checkout.sessions.create({
+    mode: "payment",
+    line_items: [lineItem],
     customer_email: customerEmail || undefined,
     success_url: `${origin}/success?purchase_id=${purchase._id}&token=${downloadToken}`,
     cancel_url: `${origin}/guides/${guide.slug}`,

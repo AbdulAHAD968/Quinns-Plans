@@ -10,6 +10,8 @@ const GuideSchema = new mongoose.Schema(
     description: { type: String, default: "" },
     priceCents: { type: Number, required: true, min: 0 },
     currency: { type: String, default: "usd" },
+    stripeProductId: { type: String, default: "" },
+    stripePriceId: { type: String, default: "" },
     formats: { type: String, enum: ["pdf", "docx", "both"], default: "pdf" },
     status: { type: String, enum: ["draft", "published", "archived"], default: "draft" },
     isActive: { type: Boolean, default: true },
