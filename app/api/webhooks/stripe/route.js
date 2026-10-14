@@ -1,6 +1,8 @@
+import { after } from "next/server";
 import { connectDB } from "@/lib/db";
 import GuidePurchase from "@/models/GuidePurchase";
 import { stripe } from "@/lib/stripe";
+import { generateGuideForPurchase } from "@/lib/generateGuide";
 
 export async function POST(req) {
   const signature = req.headers.get("stripe-signature");
@@ -28,8 +30,16 @@ export async function POST(req) {
       purchase.customerEmail = purchase.customerEmail || checkoutSession.customer_details?.email || "";
       purchase.generationStatus = "pending";
       await purchase.save();
-      // Guide generation (AI content + PDF/DOCX render) is triggered by a separate
-      // background worker reading generationStatus: "pending" purchases, not inline here.
+
+      // Scheduled to run after this response is sent (Vercel keeps the function
+      // alive for it), so Stripe gets a fast ack regardless of how long
+      // OpenAI/PDF rendering/Cloudinary take.
+      const purchaseId = purchase._id;
+      after(() =>
+        generateGuideForPurchase(purchaseId).catch((err) => {
+          console.error(`Guide generation failed for purchase ${purchaseId}:`, err);
+        })
+      );
     }
   }
 

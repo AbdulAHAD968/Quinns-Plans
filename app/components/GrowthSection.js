@@ -41,7 +41,7 @@ export default function GrowthSection() {
             Small steps, followed consistently, grow into something real
           </h2>
           <p style={{ fontSize: 16, lineHeight: 1.75, color: "rgba(247,244,239,0.75)", marginBottom: 16, maxWidth: 480 }}>
-            Your guide isn't a one-time checklist — it's a structure you keep coming back to. Each step builds on
+            Your guide isn't a one-time checklist - it's a structure you keep coming back to. Each step builds on
             the last, the same way a single root becomes a branch, then a canopy, then fruit.
           </p>
           <p style={{ fontSize: 16, lineHeight: 1.75, color: "rgba(247,244,239,0.75)", maxWidth: 480 }}>

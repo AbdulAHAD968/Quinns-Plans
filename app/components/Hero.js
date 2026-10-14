@@ -33,9 +33,11 @@ export default function Hero() {
           className="hero-grid"
           style={{
             margin: "0 auto",
-            padding: "140px 72px 64px",
-            maxWidth: 820,
-            textAlign: "center",
+            padding: "140px 7vw 64px",
+            width: "58%",
+            maxWidth: 760,
+            marginRight: "42%",
+            textAlign: "left",
             position: "relative",
             zIndex: 2,
           }}
@@ -69,6 +71,7 @@ export default function Hero() {
               letterSpacing: "-1.2px",
               color: "var(--color-on-dark)",
               marginBottom: 20,
+              maxWidth: 650,
               animationDelay: "80ms",
               textShadow: "0 2px 24px rgba(0,0,0,0.4)",
             }}
@@ -84,8 +87,6 @@ export default function Hero() {
               color: "rgba(247,244,239,0.85)",
               marginBottom: 32,
               maxWidth: 560,
-              marginLeft: "auto",
-              marginRight: "auto",
               textShadow: "0 1px 12px rgba(0,0,0,0.5)",
             }}
           >
@@ -95,7 +96,7 @@ export default function Hero() {
 
           <div
             className="fade-up"
-            style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", animationDelay: "240ms" }}
+            style={{ display: "flex", gap: 12, justifyContent: "flex-start", flexWrap: "wrap", animationDelay: "240ms" }}
           >
             <a
               href="#categories"
@@ -140,21 +141,21 @@ export default function Hero() {
           content: "";
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 60% 70% at 50% 45%, rgba(33,33,33,0.82) 0%, rgba(33,33,33,0.45) 55%, transparent 80%);
+          background: linear-gradient(90deg, rgba(33,33,33,0.98) 0%, rgba(33,33,33,0.9) 42%, rgba(33,33,33,0.28) 72%, rgba(33,33,33,0.06) 100%);
           z-index: 1;
           pointer-events: none;
         }
-        .hero-grid { width: 100%; }
+        .hero-grid { width: 58%; }
         .hero-side {
           position: absolute;
           top: 0;
           bottom: 0;
-          width: 34%;
+          width: 46%;
           z-index: 0;
-          opacity: 0.85;
+          opacity: 0.95;
         }
         .hero-side--right {
-          right: -6%;
+          right: 0;
         }
         .hero-side--candle {
           display: flex;
@@ -163,11 +164,19 @@ export default function Hero() {
         }
         .hero-side--candle > div {
           position: relative !important;
-          width: 70% !important;
-          height: 70% !important;
+          width: 86% !important;
+          height: 86% !important;
         }
         @media (max-width: 900px) {
           .hero-side { display: none !important; }
+          .hero-grid {
+            width: 100%;
+            max-width: none !important;
+            margin-right: 0 !important;
+            text-align: center !important;
+          }
+          .hero-grid p { margin-left: auto; margin-right: auto; }
+          .hero-grid > div:last-child { justify-content: center !important; }
         }
         @media (max-width: 768px) {
           .hero-section { padding: 6px 12px 12px !important; }
