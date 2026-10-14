@@ -89,7 +89,10 @@ export async function POST(req) {
     customer_email: customerEmail || undefined,
     success_url: `${origin}/success?purchase_id=${purchase._id}&token=${downloadToken}`,
     cancel_url: `${origin}/guides/${guide.slug}`,
-    metadata: { purchaseId: String(purchase._id) },
+    metadata: {
+      purchaseId: String(purchase._id),
+      token: downloadToken,
+    },
   });
 
   purchase.stripeSessionId = checkoutSession.id;

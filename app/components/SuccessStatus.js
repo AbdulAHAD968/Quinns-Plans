@@ -12,6 +12,7 @@ import {
   Sparkles,
   ArrowRight,
   RefreshCw,
+  Clock,
 } from "lucide-react";
 import CelebrationConfetti from "./CelebrationConfetti";
 

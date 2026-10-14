@@ -1,8 +1,10 @@
 import { after } from "next/server";
 import { connectDB } from "@/lib/db";
 import GuidePurchase from "@/models/GuidePurchase";
+import Guide from "@/models/Guide";
 import { stripe } from "@/lib/stripe";
 import { generateGuideForPurchase } from "@/lib/generateGuide";
+import { sendGuideDeliveryEmail } from "@/lib/email";
 
 export async function POST(req) {
   const signature = req.headers.get("stripe-signature");
@@ -35,7 +37,30 @@ export async function POST(req) {
       // alive for it), so Stripe gets a fast ack regardless of how long
       // OpenAI/PDF rendering/Cloudinary take.
       const purchaseId = purchase._id;
-      after(() => generateGuideForPurchase(purchaseId).catch(() => {})); // errors are logged and recorded inside generateGuideForPurchase
+      const customerEmail = purchase.customerEmail;
+      const rawToken = checkoutSession.metadata?.token || "";
+      const origin = process.env.CLIENT_URL || "https://plans.bodybyquinn.com";
+
+      after(async () => {
+        try {
+          const generated = await generateGuideForPurchase(purchaseId);
+          if (generated?.generationStatus === "ready" && customerEmail) {
+            const guide = await Guide.findById(purchase.guideId);
+            const guideTitle = guide?.title || "Personalized Guide";
+            const downloadUrl = `${origin}/download/${purchaseId}?token=${encodeURIComponent(rawToken)}`;
+            const successUrl = `${origin}/success?purchase_id=${purchaseId}&token=${encodeURIComponent(rawToken)}`;
+
+            await sendGuideDeliveryEmail({
+              toEmail: customerEmail,
+              guideTitle,
+              downloadUrl,
+              successUrl,
+            });
+          }
+        } catch (err) {
+          console.error("Post-payment guide processing error:", err);
+        }
+      });
     }
   }
 
