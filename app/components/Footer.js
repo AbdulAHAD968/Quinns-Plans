@@ -38,7 +38,7 @@ export default function Footer() {
               </span>
             </a>
             <p style={{ fontSize: 13.5, lineHeight: 1.7, color: "var(--color-on-dark-soft)" }}>
-              Personalized guides built around your real life — not a generic template. Pick a category, answer a few questions, get your plan.
+              Personalized guides built around your real life - not a generic template. Pick a category, answer a few questions, get your plan.
             </p>
           </div>
 

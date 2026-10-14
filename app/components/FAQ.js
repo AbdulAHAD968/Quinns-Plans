@@ -4,11 +4,11 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 
 const ITEMS = [
-  { q: "What exactly do I get?", a: "A personalized PDF guide (or DOCX, depending on the guide) built from your specific answers — not a generic template everyone receives." },
+  { q: "What exactly do I get?", a: "A personalized PDF guide (or DOCX, depending on the guide) built from your specific answers - not a generic template everyone receives." },
   { q: "How personalized is it really?", a: "Your answers drive the structure, scope, and recommendations in the guide. Two people with different situations get meaningfully different guides." },
   { q: "When do I get charged?", a: "Only after you preview the guide's structure and confirm you want it. Payment is processed securely through Stripe." },
   { q: "What if I'm not happy with it?", a: "Reach out to us and we'll make it right. We want you using the guide, not just buying it." },
-  { q: "Can I download it again later?", a: "Yes — your download link stays available, and your purchase confirmation email includes it as well." },
+  { q: "Can I download it again later?", a: "Yes - your download link stays available, and your purchase confirmation email includes it as well." },
 ];
 
 export default function FAQ() {

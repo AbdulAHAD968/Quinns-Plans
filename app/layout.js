@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Body By Quinn — Personalized Guides",
+  title: "Body By Quinn - Personalized Guides",
   description: "Get a plan built around your life, not a generic template. Personalized guides for home, fitness, beauty, kitchen, and more.",
 };
 

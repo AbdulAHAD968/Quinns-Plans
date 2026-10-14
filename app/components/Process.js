@@ -1,5 +1,5 @@
 const STEPS = [
-  { num: "01", title: "Pick a category", desc: "Home organization, fitness, beauty, kitchen, work, or travel — choose what you want to improve." },
+  { num: "01", title: "Pick a category", desc: "Home organization, fitness, beauty, kitchen, work, or travel - choose what you want to improve." },
   { num: "02", title: "Answer a few questions", desc: "Tell us about your space, goals, time, and budget. It takes about 3 minutes." },
   { num: "03", title: "Preview your plan", desc: "See the guide's structure and what's included before you pay anything." },
   { num: "04", title: "Get your guide", desc: "Pay securely, then download your personalized PDF guide instantly." },

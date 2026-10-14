@@ -86,7 +86,7 @@ export default function SuccessStatus({ purchaseId, token }) {
       <Loader2 size={32} className="spin" style={{ color: "var(--color-primary)", marginBottom: 16 }} />
       <h1 style={{ fontSize: 24, color: "var(--color-ink)", marginBottom: 8 }}>Payment confirmed</h1>
       <p style={{ color: "var(--color-muted)", fontSize: 15 }}>
-        We're generating your personalized guide now. This usually takes a minute — this page updates automatically.
+        We're generating your personalized guide now. This usually takes a minute - this page updates automatically.
       </p>
       <style>{`.spin { animation: spin 0.8s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </>

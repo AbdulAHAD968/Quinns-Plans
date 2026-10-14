@@ -84,7 +84,7 @@ export default function Hero() {
             }}
           >
             Answer a few questions about your home, your goals, or your routine. Get a personalized step-by-step
-            guide — delivered as a PDF you can start using today.
+            guide - delivered as a PDF you can start using today.
           </p>
 
           <div
