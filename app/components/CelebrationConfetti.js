@@ -2,7 +2,19 @@
 
 export default function CelebrationConfetti() {
   return (
-    <div className="confetti-wrapper" style={{ display: "inline-block", position: "relative" }}>
+    <div
+      className="confetti-wrapper"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+        width: 190,
+        height: 190,
+        margin: "0 auto",
+        overflow: "hidden",
+      }}
+    >
       <svg
         version="1.1"
         id="confetti_svg"
