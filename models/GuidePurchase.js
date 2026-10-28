@@ -23,6 +23,7 @@ const GuidePurchaseSchema = new mongoose.Schema(
     lastDownloadedAt: { type: Date },
     generationStatus: { type: String, enum: ["pending", "generating", "ready", "failed"], default: "pending" },
     generationError: { type: String, default: "" },
+    generationReport: { type: mongoose.Schema.Types.Mixed, default: null },
   },
   { timestamps: true }
 );
