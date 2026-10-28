@@ -53,6 +53,18 @@ export async function POST(req) {
     }
   }
 
+  // Free-text answers end up in AI prompts and the PDF, so bound their shape.
+  for (const q of questionnaire.questions) {
+    const v = answers[q.key];
+    if (!isAnswerPresent(v)) continue;
+    if (q.type === "date" && !(typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v)))) {
+      return Response.json({ error: `"${q.label}" must be a valid date.` }, { status: 400 });
+    }
+    if ((q.type === "short_text" && (typeof v !== "string" || v.length > 120)) || (q.type === "text" && (typeof v !== "string" || v.length > 1000))) {
+      return Response.json({ error: `"${q.label}" is too long or invalid.` }, { status: 400 });
+    }
+  }
+
   const session = await getOrCreateVisitorSession(req);
   await logEvent(session, "checkout_start", { guideSlug });
 

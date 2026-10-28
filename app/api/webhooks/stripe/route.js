@@ -6,6 +6,9 @@ import { stripe } from "@/lib/stripe";
 import { generateGuideForPurchase } from "@/lib/generateGuide";
 import { sendGuideDeliveryEmail } from "@/lib/email";
 
+// Guide generation runs in after(); allow it the full window.
+export const maxDuration = 300;
+
 export async function POST(req) {
   const signature = req.headers.get("stripe-signature");
   const payload = await req.text();

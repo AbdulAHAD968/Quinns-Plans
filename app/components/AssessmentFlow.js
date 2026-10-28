@@ -654,6 +654,32 @@ function QuestionInput({ question, value, onChange, onOptionSelect, onEnterPress
     );
   }
 
+  if (question.type === "short_text" || question.type === "date") {
+    const isDate = question.type === "date";
+    return (
+      <input
+        type={isDate ? "date" : "text"}
+        value={value ?? ""}
+        maxLength={isDate ? undefined : 120}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && onEnterPress) onEnterPress();
+        }}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={isDate ? undefined : "Type your answer..."}
+        style={{
+          width: "100%",
+          padding: "14px 18px",
+          borderRadius: 10,
+          border: "1px solid var(--color-hairline)",
+          fontSize: 16,
+          backgroundColor: "var(--color-surface-card)",
+          color: "var(--color-ink)",
+          outline: "none",
+        }}
+      />
+    );
+  }
+
   if (question.type === "number") {
     return (
       <input

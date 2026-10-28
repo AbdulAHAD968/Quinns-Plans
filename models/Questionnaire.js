@@ -9,7 +9,7 @@ const QuestionSchema = new mongoose.Schema(
   {
     key: { type: String, required: true, trim: true },
     label: { type: String, required: true, trim: true },
-    type: { type: String, enum: ["single_select", "multi_select", "number", "text", "scale"], required: true },
+    type: { type: String, enum: ["single_select", "multi_select", "number", "text", "short_text", "date", "scale"], required: true },
     options: { type: [QuestionOptionSchema], default: [] },
     required: { type: Boolean, default: true },
     conditionalOn: {
