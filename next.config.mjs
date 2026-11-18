@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
+  serverExternalPackages: ["@react-pdf/renderer"],
   /* config options here */
   turbopack: {
     rules: {
