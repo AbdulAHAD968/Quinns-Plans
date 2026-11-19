@@ -58,12 +58,19 @@ const sections = [
   ] },
 ];
 
+// Optional Quinn test images (scripts/quinn-test-images.mjs) for cover, outfit gallery and banner.
+const opt = (f) => (fs.existsSync(f) ? fs.readFileSync(f) : null);
+const quinnCover = opt("tmp/quinn-cover.jpg");
+const outfit = sections.find((x) => /outfit/i.test(x.title));
+if (opt("tmp/quinn-outfit.jpg")) outfit.gallery = [{ bytes: opt("tmp/quinn-outfit.jpg"), caption: "Sightseeing look" }, { bytes: opt("tmp/quinn-dinner.jpg"), caption: "Dinner look" }, { bytes: opt("tmp/quinn-cover.jpg"), caption: "Evening look" }];
+
 const pdf = await renderGuidePdfMagazine({
   title: "The Luxury Travel Edit",
   categoryName: "Travel & Lifestyle",
   objectives: ["Pack light", "Look polished", "Travel stress-free", "Stay organized"],
   sections,
-  coverImageBytes: photo,
+  coverImageBytes: quinnCover || photo,
+  bannerImageBytes: opt("tmp/quinn-outfit.jpg"),
   cover: { title: "The Luxury Travel Edit", subtitle: "Seoul, Korea", details: "DEC 30, 2026 - JAN 10, 2027  |  11 NIGHTS", preparedFor: "Prepared for Sarah" },
 });
 fs.writeFileSync(out, pdf);
