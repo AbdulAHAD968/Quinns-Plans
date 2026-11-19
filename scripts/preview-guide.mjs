@@ -70,7 +70,7 @@ const pdf = await renderGuidePdfMagazine({
   objectives: ["Pack light", "Look polished", "Travel stress-free", "Stay organized"],
   sections,
   coverImageBytes: quinnCover || photo,
-  bannerImageBytes: opt("tmp/quinn-outfit.jpg"),
+  bannerImageBytes: opt(process.env.BANNER || "tmp/quinn-outfit.jpg"),
   cover: { title: "The Luxury Travel Edit", subtitle: "Seoul, Korea", details: "DEC 30, 2026 - JAN 10, 2027  |  11 NIGHTS", preparedFor: "Prepared for Sarah" },
 });
 fs.writeFileSync(out, pdf);
